@@ -1,1 +1,1 @@
-# sg_assignment
+# Code to accompany the SG assignment 
