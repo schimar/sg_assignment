@@ -18,7 +18,7 @@ bedtools intersect -v -a chr19.bam -b target_regions.bed -bed | cut -f1,2,3 > no
 sed '/\-1/d' non_targets.bed > nt.bed
 ```
 
-Then, we calculate the coverage for both the target & non-target regions and the coverage for chromosome 19:
+Now, we calculate the coverage for both the target & non-target regions and the coverage for chromosome 19:
 ```
 bedtools coverage -a target_regions.bed -b chr19.bam -mean > MeanCoverageBEDtarget.bedgraph
 bedtools coverage -a nt.bed -b chr19.bam -mean > MeanCoverageBEDnt.bedgraph
@@ -56,15 +56,21 @@ For the calculation of summary statistics and plotting, please see the accompani
 
 ## 2) Variant calling 
 
+We'll call variants with relaxed parameters, where 
+- for *freebayes*, we'll relax the standard parameters by lowering the 'c' parameter, so that only one alternative allele has to be found to be considered, and 
+- for *bbtools*, we'll decrease the rarity parameter from 1 to 0.01 (i.e. we'll consider variants with an alternative frequency of 1%) and we'll decrease the phred score for variants to be considered to 2 (where 20 would be the default).
+```
+freebayes/bin/freebayes -f human_g1k_v37.fa -r 19 chr19.bam -C 1 > fbvars19rlxd.vcf  
 
+bbmap/callvariants.sh in=chr19.bam out=bbvars19rlxd2.vcf ref=human_g1k_v37.fa ploidy=2 -Xmx18g threads=8 -minscore=2.0 rarity=0.01
 
+# further filter both vcf files:
 
+bin\vcfFBfilt.py fbvars19rlxd.vcf > fbvars19rlxd_fltrd.vcf
+bin/vcfBBfilt.py bbvars19rlxd2.vcf > bbvars19rlxd2fltrd.vcf
+```
+Note that the strict variant callsets were obtained by running *freebayes* without *C = 1* and *bbtools* with *minscore=20.0 and rarity=1.0*. 
 
-fb, bbtools & filtering
- variant calling settings and filtering (word so that it fits with the "make sure that you clarify" - first point
- details about matching of variants for ex. 3
-
- matching of variants with bed file !!! 
 
 <br/>
 
