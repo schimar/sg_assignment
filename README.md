@@ -1,7 +1,7 @@
 # Code to accompany the SG assignment 
 Details on the actual task shall be omitted here. 
 
-The following software tools are required to make this work:
+The following software is required to make this work:  
 	- UNIX Bash  
 	- Python 3.8  
 	- R (tested on v.3.6.3)  
