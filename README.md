@@ -64,9 +64,9 @@ freebayes/bin/freebayes -f human_g1k_v37.fa -r 19 chr19.bam -C 1 > fbvars19rlxd.
 
 bbmap/callvariants.sh in=chr19.bam out=bbvars19rlxd2.vcf ref=human_g1k_v37.fa ploidy=2 -Xmx18g threads=8 -minscore=2.0 rarity=0.01
 
-# further filter both vcf files:
+# further filter both vcf files (see Supporting Information in the report, as well as the respective *python* filtering scripts in the *bin* folder for details on filtering criteria):
 
-bin\vcfFBfilt.py fbvars19rlxd.vcf > fbvars19rlxd_fltrd.vcf
+bin/vcfFBfilt.py fbvars19rlxd.vcf > fbvars19rlxd_fltrd.vcf
 bin/vcfBBfilt.py bbvars19rlxd2.vcf > bbvars19rlxd2fltrd.vcf
 ```
 Note that the strict variant callsets were obtained by running *freebayes* without *C = 1* and *bbtools* with *minscore=20.0 and rarity=1.0*. 
