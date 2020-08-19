@@ -52,7 +52,13 @@ For the calculation of summary statistics and plotting, please see the accompani
 
 <br/>
 
+===================================================
+
 ## 2) Variant calling 
+
+
+
+
 
 fb, bbtools & filtering
  variant calling settings and filtering (word so that it fits with the "make sure that you clarify" - first point
@@ -61,6 +67,8 @@ fb, bbtools & filtering
  matching of variants with bed file !!! 
 
 <br/>
+
+===================================================
 
 ## 3) Analytical performance 
 
