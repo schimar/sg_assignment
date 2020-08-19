@@ -71,6 +71,38 @@ bin/vcfBBfilt.py bbvars19rlxd2.vcf > bbvars19rlxd2fltrd.vcf
 ```
 Note that the strict variant callsets were obtained by running *freebayes* without *C = 1* and *bbtools* with *minscore=20.0 and rarity=1.0*. 
 
+<br/>
+
+### Tables 1 and S1
+To get the numbers of SNPs, DELs and INS for ground_truth.vcf, we can run:
+```
+grep -v '#' ground_truth.vcf | awk -f bin/nTypGT.awk
+```
+Similarly, for the *freebayes* and *bbtools* sets, we can do the following: 
+
+```
+# fbvars
+egrep -o 'TYPE=[a-z]{3}' fbvars19rlxd_fltrd.vcf | grep -v '#' | wc -l
+egrep -o 'TYPE=[a-z]{3}' fbvars19rlxd_fltrd.vcf | cut -f2 -d'=' | sort | uniq -c
+
+# bbvars:
+egrep -o 'TYP=[A-Z]{3}' bbvars19fltrd.vcf | cut -f2 -d'=' | sort | uniq -c
+egrep -o 'TYP=[A-Z]{3}' bbvars19rlxd2fltrd.vcf | cut -f2 -d'=' | sort | uniq -c
+```
+
+And lastly, we count how many variants are present in our target-regions:
+```
+# fbvars
+vcfInBed.py fbvars19rlxd_fltrd.vcf ../target_regions.bed | wc -l
+vcfInBed.py fbvars19fltrd.vcf ../target_regions.bed | wc -l
+
+# bbvars
+vcfInBed.py bbvars19fltrd.vcf ../target_regions.bed | wc -l
+vcfInBed.py bbvars19rlxd2fltrd.vcf ../target_regions.bed | wc -l
+
+# ground_truth.vcf 
+vcfInBed.py ground_truth.vcf ../target_regions.bed | wc -l
+```
 
 <br/>
 
@@ -78,13 +110,42 @@ Note that the strict variant callsets were obtained by running *freebayes* witho
 
 ## 3) Analytical performance 
 
-We first calculate the confusion matrix for the respective variant callsets. Here, the ground-truth set always acts as the "actual" data, with the *freebayes* and *bbtools* variants as predicted variant set. 
+We first calculate the confusion matrix for the respective variant callset. Here, the ground-truth set always acts as the "actual" data, with the *freebayes* and *bbtools* variants as predicted variant set. 
 
 ```
+for i in *rlxd_fltrd.vcf; do 
+	echo $i
+	getConfusionMatrix.py ground_truth.vcf $i
+done	
 
+### this would give us the following: 
+#bbvars19rlxd2fltrd.vcf
+#+------------+-----------------+----------------+
+#|            |   predicted yes |   predicted no |
+#+============+=================+================+
+#| actual yes |             966 |          17647 |
+#+------------+-----------------+----------------+
+#| actual no  |           19118 |       14701826 |
+#+------------+-----------------+----------------+ 
+#
+#Sensitivity = 5
+#Precision = 4
+#Specificity = 99
 
+#fbvars19rlxd_fltrd.vcf
+#+------------+-----------------+----------------+
+#|            |   predicted yes |   predicted no |
+#+============+=================+================+
+#| actual yes |            2806 |          15807 |
+#+------------+-----------------+----------------+
+#| actual no  |           30067 |       14690877 |
+#+------------+-----------------+----------------+ 
+#
+#Sensitivity = 15
+#Precision = 8
+#Specificity = 99
 ```
 
-For plotting of the derivations of the confusion matrices, please see the accompanied *R* script *confMatStats.r* in the *bin* folder.
+For plotting of the derivations of the confusion matrices (i.e. sensitivity, precision and specificity), please see the accompanied *R* script *confMatStats.r* in the *bin* folder.
 
 
