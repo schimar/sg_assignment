@@ -57,7 +57,7 @@ done
 
 ```
 
-For the calculation of summary statistics and plotting, please see the accompanied *R* script *cov_plots.r* in the *bin* folder.
+For the calculation of summary statistics and plotting, please see the accompanied *R* script *cov_plots.r* in the [*bin*](https://github.com/schimar/sg_assignment/tree/master/bin/) folder.
 
 <br/>
 
