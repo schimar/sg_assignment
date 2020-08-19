@@ -78,6 +78,13 @@ Note that the strict variant callsets were obtained by running *freebayes* witho
 
 ## 3) Analytical performance 
 
+We first calculate the confusion matrix for the respective variant callsets. Here, the ground-truth set always acts as the "actual" data, with the *freebayes* and *bbtools* variants as predicted variant set. 
+
+```
+
+
+```
+
 For plotting of the derivations of the confusion matrices, please see the accompanied *R* script *confMatStats.r* in the *bin* folder.
 
 
