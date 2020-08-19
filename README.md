@@ -113,37 +113,40 @@ vcfInBed.py ground_truth.vcf ../target_regions.bed | wc -l
 We first calculate the confusion matrix for the respective variant callset. Here, the ground-truth set always acts as the "actual" data, with the *freebayes* and *bbtools* variants as predicted variant set. 
 
 ```
-for i in *rlxd_fltrd.vcf; do 
-	echo $i
-	getConfusionMatrix.py ground_truth.vcf $i
-done	
 
-### this would give us the following: 
-#bbvars19rlxd2fltrd.vcf
-#+------------+-----------------+----------------+
-#|            |   predicted yes |   predicted no |
-#+============+=================+================+
-#| actual yes |             966 |          17647 |
-#+------------+-----------------+----------------+
-#| actual no  |           19118 |       14701826 |
-#+------------+-----------------+----------------+ 
-#
-#Sensitivity = 5
-#Precision = 4
-#Specificity = 99
+### confusion matrices: 
+for i in *bvars*fltrd.vcf; do  
+	echo $i >> confMat.txt
+	python3 ../shd/getConfusionMatrix.py ground_truth.vcf $i  >> confMat.txt
+	printf "\n---------------------------------------------------------\n" >> confMat.txt
+done
 
-#fbvars19rlxd_fltrd.vcf
-#+------------+-----------------+----------------+
-#|            |   predicted yes |   predicted no |
-#+============+=================+================+
-#| actual yes |            2806 |          15807 |
-#+------------+-----------------+----------------+
-#| actual no  |           30067 |       14690877 |
-#+------------+-----------------+----------------+ 
-#
-#Sensitivity = 15
-#Precision = 8
-#Specificity = 99
+### this would give us the following (e.g. for bbvars19rlxd2fltrd.vcf)
+
+#			 bbvars19rlxd2fltrd.vcf
+#			 +------------+-----------------+----------------+
+#			 |            |   predicted yes |   predicted no |
+#			 +============+=================+================+
+#			 | actual yes |             966 |          17647 |
+#			 +------------+-----------------+----------------+
+#			 | actual no  |           19118 |       14701826 |
+#			 +------------+-----------------+----------------+ 
+#			 
+#			 Sensitivity = 5
+#			 Precision = 4
+#			 Specificity = 99
+
+
+### derivations from confusion matrix (we pretty much do the same as above, but here, we only grep the derivations ffrom the output, to write them into a file): 
+
+# make barplot in R 
+
+for i in *bvars*fltrd.vcf; do  
+	echo $i >> confMatDerivat.txt
+	python3 ../shd/getConfusionMatrix.py ground_truth.vcf $i | grep 'Sensitivity\|Precision\|Specificity' >> confMatDerivat.txt
+	printf "\n---------------------------------------------------------\n" >> confMatDerivat.txt
+done
+
 ```
 
 For plotting of the derivations of the confusion matrices (i.e. sensitivity, precision and specificity), please see the accompanied *R* script *confMatStats.r* in the *bin* folder.
