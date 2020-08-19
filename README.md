@@ -11,7 +11,7 @@ The following software is required to make this work:
 	- samtools (with v.>=1.10)  
 
 The code was run on a Ubuntu 20.04 OS, and all of the below code was run in Bash. 
-Please note that the path of respective scripts is not taken into account below. You'd have to append the *bin/* folder to make it work. Also, the files given in the assignment, as well as the human_g1k_v37.fa assembly (downloaded from the 1000genome project) need to be in the given path. 
+Please note that the path of respective scripts is not taken into account below. You'd have to append the *bin/* folder to make it work. Also, the files given in the assignment, as well as the human_g1k_v37.fa assembly (downloaded from the 1000genome project) need to be in your working directory. 
 
 =====================================================================
 
