@@ -2,13 +2,14 @@
 Details on the actual task shall be omitted here. 
 
 The following software tools are required to make this work:
-	- UNIX Bash
-	- Python 3.8
-	- R (tested on v.3.6.3)
-	- bedtools (tested on v.2.29.2)
-	- bbtools v.38.86
-	- freebayes v.1.3.2
-	- samtools (with v.>=1.10)
+	- UNIX Bash  
+	- Python 3.8  
+	- R (tested on v.3.6.3)  
+	- bedtools (tested on v.2.29.2)  
+	- bbtools v.38.86  
+	- freebayes v.1.3.2  
+	- samtools (with v.>=1.10)  
+
 The code was run on a Ubuntu 20.04 OS, and all of the below code was run in Bash. 
 Please note that the path of respective scripts is not taken into account below. You'd have to append the *bin/* folder to make it work. 
 
