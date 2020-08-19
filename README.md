@@ -4,7 +4,7 @@ Details on the actual task shall be omitted here.
 
 more infos here... Unix Bash 
 
-
+<br/>
 1) Read coverage 
 
 First, we need to create a bed file with all regions on chromosome 19 that are not in the target region (note that we're only going to need the first 3 columns here):
@@ -46,7 +46,7 @@ done
 ```
 
 For the calculation of summary statistics and plotting, please see the accompanied *R* script *cov_plots.r* in the *bin* folder.
-
+<br/>
 2) Variant calling 
 
 fb, bbtools & filtering
@@ -55,7 +55,7 @@ fb, bbtools & filtering
 
  matching of variants with bed file !!! 
 
-
+<br/>
 3) Analytical performance 
 
 For plotting of the derivations of the confusion matrices, please see the accompanied *R* script *confMatStats.r* in the *bin* folder.
