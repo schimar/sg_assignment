@@ -50,7 +50,7 @@ for (i in 1:length(files)) {
 
 
 # create figure 
-cols <- rev(brewer.pal(length(cov), "Dark2"))
+cols <- brewer.pal(length(cov), "Dark2")
 png("figs/hist_cov.png", h=1000, w=1000, pointsize=20)
 plot(cov[[1]][2:1067, 2], cov_cumul[[1]][1:1066], type='n', xlab="Depth", ylab="Fraction of captured bases \u2265 depth", ylim=c(0,1.0), main="Region Coverage")
 abline(v = 20, col = "gray60")
@@ -64,8 +64,8 @@ axis(2, at=c(0.90), labels=c(0.90))
 axis(2, at=c(0.50), labels=c(0.50))
 
 # plot the actual data
-for (i in 1:length(cov)) points(cov[[i]][2:1067, 2], cov_cumul[[i]][1:1066], type='l', lwd=4, col=cols[i])
-legend("topright", legend=c('target', 'non-target', 'total'), col=rev(cols), lty=1, lwd=5)
+for (i in 1:length(cov)) points(cov[[i]][2:1067, 2], cov_cumul[[i]][1:1066], type='l', lwd=4, col=rev(cols)[i])
+legend("topright", legend=c('target', 'non-target', 'total'), col=cols, lty=1, lwd=5)
 dev.off()
 
 
