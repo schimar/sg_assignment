@@ -11,7 +11,7 @@ The following software is required to make this work:
 	- samtools (with v.>=1.10)  
 
 The code was run on a Ubuntu 20.04 OS, and all of the below code was run in Bash. 
-Please note that the path of respective scripts is not taken into account below. You'd have to append the *bin/* folder to make it work. Also, the files given in the assignment, as well as the human_g1k_v37.fa assembly (downloaded from the 1000genome project) need to be in your working directory. 
+Please note that the path of respective scripts is not taken into account below. You'd have to append the [*bin*](https://github.com/schimar/sg_assignment/tree/master/bin/) folder to make it work. Also, the files given in the assignment, as well as the human_g1k_v37.fa assembly (downloaded from the 1000genome project) need to be in your working directory. 
 
 =====================================================================
 
@@ -70,7 +70,7 @@ We'll call variants with relaxed parameters, where
 - for *freebayes*, we'll relax the standard parameters by lowering the 'c' parameter, so that only one alternative allele has to be found to be considered, and 
 - for *bbtools*, we'll decrease the rarity parameter from 1 to 0.01 (i.e. we'll consider variants with an alternative frequency of 1%) and we'll decrease the phred score for variants to be considered to 2 (where 20 would be the default).
 ```
-freebayes/bin/freebayes -f human_g1k_v37.fa -r 19 chr19.bam -C 1 > fbvars19rlxd.vcf  
+freebayes -f human_g1k_v37.fa -r 19 chr19.bam -C 1 > fbvars19rlxd.vcf  
 
 bbmap/callvariants.sh in=chr19.bam out=bbvars19rlxd2.vcf ref=human_g1k_v37.fa ploidy=2 -Xmx18g threads=8 -minscore=2.0 rarity=0.01
 
@@ -157,6 +157,6 @@ done
 
 ```
 
-To plot the derivations of the confusion matrices (i.e. sensitivity, precision and specificity), please see the accompanied *R* script *confMatStats.r* in the *bin* folder.
+To plot the derivations of the confusion matrices (i.e. sensitivity, precision and specificity), please see the accompanied *R* script *confMatStats.r* in the [*bin*](https://github.com/schimar/sg_assignment/tree/master/bin/) folder.
 
 
