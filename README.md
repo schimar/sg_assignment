@@ -123,23 +123,21 @@ done
 
 ### this would give us the following (e.g. for bbvars19rlxd2fltrd.vcf)
 
-#			 bbvars19rlxd2fltrd.vcf
-#			 +------------+-----------------+----------------+
-#			 |            |   predicted yes |   predicted no |
-#			 +============+=================+================+
-#			 | actual yes |             966 |          17647 |
-#			 +------------+-----------------+----------------+
-#			 | actual no  |           19118 |       14701826 |
-#			 +------------+-----------------+----------------+ 
-#			 
-#			 Sensitivity = 5
-#			 Precision = 4
-#			 Specificity = 99
+#		 bbvars19rlxd2fltrd.vcf
+#		 +------------+-----------------+----------------+
+#		 |            |   predicted yes |   predicted no |
+#		 +============+=================+================+
+#		 | actual yes |             966 |          17647 |
+#		 +------------+-----------------+----------------+
+#		 | actual no  |           19118 |       14701826 |
+#		 +------------+-----------------+----------------+ 
+#		 
+#		 Sensitivity = 5
+#		 Precision = 4
+#		 Specificity = 99
 
 
 ### derivations from confusion matrix (we pretty much do the same as above, but here, we only grep the derivations ffrom the output, to write them into a file): 
-
-# make barplot in R 
 
 for i in *bvars*fltrd.vcf; do  
 	echo $i >> confMatDerivat.txt
